@@ -1,15 +1,36 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Slot } from 'src/slot/entities/slot.entity';
+import { Entity, PrimaryColumn, Column, ManyToOne, JoinColumn } from 'typeorm';
+
 @Entity()
 export class Product {
-    constructor(
-        public productId: number,
-        public warehouseId: number,
-        public slotId: number,
-        public productName: string,
-        public price: number,
-        public stock: number,
-        public description: string,  
-        public timeReceive: Date,
-        public timeDelivery: Date,
-    ) {}
+  @PrimaryColumn()
+  productId: number;
+
+  @Column()
+  warehouseId: number;
+
+  @Column()
+  slotId: number;
+
+  @Column()
+  productName: string;
+
+  @Column('decimal')
+  price: number;
+
+  @Column()
+  stock: number;
+
+  @Column({ nullable: true })
+  description: string;
+
+  @Column({ type: 'datetime' })
+  timeReceive: Date;
+
+  @Column({ type: 'datetime' })
+  timeDelivery: Date;
+  
+  @ManyToOne(() => Slot, (slot) => slot.products)
+  @JoinColumn({ name: 'slotId' })
+  slot: Slot;
 }
