@@ -1,9 +1,16 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSlotDto } from './dto/create-slot.dto';
 import { UpdateSlotDto } from './dto/update-slot.dto';
+import { Slot } from './entities/slot.entity';
+import { Repository } from 'typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 
 @Injectable()
 export class SlotService {
+  constructor(
+    @InjectRepository(Slot)
+    private slotRepository: Repository<Slot>,
+  ) {}
   create(createSlotDto: CreateSlotDto) {
     return 'This action adds a new slot';
   }
@@ -12,8 +19,14 @@ export class SlotService {
     return `This action returns all slot`;
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} slot`;
+  async findOne(id: number) {
+    const slot = await this.slotRepository
+      .findOne({
+        where: { slotId: id },
+      });
+    if (!slot) {
+      throw new Error(`Slot with id ${id} not found`);
+    } else return slot;
   }
 
   update(id: number, updateSlotDto: UpdateSlotDto) {
