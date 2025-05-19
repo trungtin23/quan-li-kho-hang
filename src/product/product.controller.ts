@@ -27,6 +27,67 @@ export class ProductController {
   findAll() {
     return this.productService.findAll();
   }
+  @Get('search-conditions')
+  async getSearchConditions() {
+    try {
+      const conditions = await this.productService.getSearchConditions();
+      return {
+        status: 200,
+        message: 'Lấy điều kiện tìm kiếm thành công.',
+        data: conditions,
+      };
+    } catch (error) {
+      return {
+        status: 500,
+        message: error.message || 'Lỗi máy chủ nội bộ.',
+        data: null,
+      };
+    }
+  }
+  @Get('search')
+  async search(@Query() searchDto: SearchProductDto) {
+    try {
+      // 2.9 Gọi service lấy hàng theo SearchProductDto
+      const result = await this.productService.searchProducts(searchDto);
+      // 2.12 return danh sách hàng cho giao diện
+      // Nếu không tìm thấy sản phẩm
+      if (result.length === 0) {
+        return {
+          status: HttpStatus.NOT_FOUND,
+          message: 'Không tìm thấy sản phẩm phù hợp.',
+          data: [],
+          dataLength: 0,
+        };
+      }
+
+      // Nếu tìm thấy sản phẩm
+      return {
+        status: HttpStatus.OK,
+        message: 'Tìm thấy sản phẩm.',
+        data: result,
+        dataLength: result.length,
+      };
+    } catch (error) {
+      // Kiểm tra nếu là HttpException để lấy status và message gốc
+      if (error.status && error.response) {
+        return {
+          status: error.status,
+          message:
+            error.response.message || 'Lỗi xảy ra khi tìm kiếm sản phẩm.',
+          data: [],
+          dataLength: 0,
+        };
+      }
+
+      // Lỗi không xác định hoặc không phải HttpException
+      return {
+        status: HttpStatus.INTERNAL_SERVER_ERROR,
+        message: 'Có lỗi xảy ra trong quá trình xử lý. Vui lòng thử lại sau.',
+        data: [],
+        dataLength: 0,
+      };
+    }
+  }
 
   @Get(':id')
   findOne(@Param('id') id: string) {
@@ -41,39 +102,5 @@ export class ProductController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.productService.remove(+id);
-  }
-  @Get('search-conditions')
-  async getSearchConditions() {
-    //2.2 Gọi service để lấy điều kiện tìm kiếm
-    const conditions = await this.productService.getSearchConditions();
-    // 2.5 return dữ liệu cho giao diện
-    return {
-      status: 200,
-      message: 'Lấy điều kiện tìm kiếm thành công.',
-      data: conditions,
-    };
-  }
-  @Get('search')
-  async search(@Query() searchDto: SearchProductDto) {
-    // 2.9 Gọi service lấy hàng theo SearchProductDto
-    const result = await this.productService.searchProducts(searchDto);
-    // 2.12 return danh sách hàng cho giao diện
-    // Nếu không tìm thấy sản phẩm
-    if (result.length === 0) {
-      return {
-        status: HttpStatus.NOT_FOUND,
-        message: 'Không tìm thấy sản phẩm phù hợp.',
-        data: [],
-        dataLength: 0,
-      };
-    }
-
-    // Nếu tìm thấy sản phẩm
-    return {
-      status: HttpStatus.OK,
-      message: 'Tìm thấy sản phẩm.',
-      data: result,
-      dataLength: result.length,
-    };
   }
 }

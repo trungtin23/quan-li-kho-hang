@@ -1,5 +1,10 @@
-
-import { IsOptional, IsString, IsNumber, IsDateString, IsEnum } from 'class-validator';
+import {
+  IsOptional,
+  IsString,
+  IsNumber,
+  IsDateString,
+  IsEnum,
+} from 'class-validator';
 
 export class SearchProductDto {
   @IsOptional()
@@ -21,6 +26,14 @@ export class SearchProductDto {
   @IsOptional()
   @IsDateString()
   timeReceiveTo?: string;
+  
+  @IsOptional()
+  @IsNumber()
+  row?: string;
+
+  @IsOptional()
+  @IsNumber()
+  column?: string;
 
   @IsOptional()
   page?: number;
