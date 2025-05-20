@@ -11,7 +11,16 @@ import { WarehouseModule } from './warehouse/warehouse.module';
 import { SlotModule } from './slot/slot.module';
 
 @Module({
-  imports: [ProductModule, UserModule, SupplierModule, TransactionModule, CarrierModule, TransactionDetailModule, WarehouseModule, SlotModule],
+  imports: [
+    ProductModule,
+    UserModule,
+    SupplierModule,
+    TransactionModule,
+    CarrierModule,
+    TransactionDetailModule,
+    WarehouseModule,
+    SlotModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
