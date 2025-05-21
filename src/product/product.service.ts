@@ -3,10 +3,10 @@ import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Product } from './entities/product.entity';
 import { SearchProductDto } from './dto/search.product.dto';
 import { SlotService } from 'src/slot/slot.service';
 import { SearchProductResponse } from './response/SearchProductResponse';
+import { Product } from 'src/entities/product.entity';
 
 @Injectable()
 export class ProductService {
