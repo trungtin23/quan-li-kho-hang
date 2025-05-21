@@ -4,6 +4,7 @@ import { ProductController } from './product.controller';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { SlotModule } from 'src/slot/slot.module';
 import { Product } from 'src/entities/product.entity';
+import { ProductRepository } from './repository/product.repository';
 
 @Module({
   imports: [
@@ -11,6 +12,6 @@ import { Product } from 'src/entities/product.entity';
     SlotModule,
   ],
   controllers: [ProductController],
-  providers: [ProductService],
+  providers: [ProductService,ProductRepository],
 })
 export class ProductModule {}
