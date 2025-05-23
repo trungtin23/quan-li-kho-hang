@@ -40,12 +40,12 @@ export class ProductRepository {
     const locations = await this.productRepository
       .createQueryBuilder('product')
       .leftJoin('product.slot', 'slot')
-      .select(['slot.row AS row', 'slot.column AS column'])
+      .select(['slot.row AS row', 'slot.column AS slotColumn'])
       .distinct(true)
       .getRawMany();
 
     const rows = Array.from(new Set(locations.map((loc) => loc.row)));
-    const columns = Array.from(new Set(locations.map((loc) => loc.column)));
+    const columns = Array.from(new Set(locations.map((loc) => loc.slotColumn)));
     return { rows, columns };
   }
 }
