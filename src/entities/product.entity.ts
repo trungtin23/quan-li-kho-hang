@@ -34,9 +34,6 @@ export class Product {
   @Column('text')
   description: string;
 
-  @Column()
-  category: string;
-
   @Column({ type: 'timestamp', nullable: true })
   timeReceive: Date;
 
