@@ -1,9 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateSlotDto } from './dto/create-slot.dto';
 import { UpdateSlotDto } from './dto/update-slot.dto';
-
-import { Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
 import { Slot } from 'src/entities/slot.entity';
 
 @Injectable()
@@ -30,7 +29,6 @@ export class SlotService {
     if (!slot) {
       throw new Error(`Slot with id ${id} not found`);
     } else return slot;
-
   }
 
   update(id: number, updateSlotDto: UpdateSlotDto) {

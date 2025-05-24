@@ -18,7 +18,6 @@ export class ProductService {
 
   async findAll() {
     return this.productRepository.findAll();
-
   }
 
   findOne(id: number) {
@@ -58,5 +57,4 @@ export class ProductService {
       throw new Error(error.message);
     }
   }
-
 }
