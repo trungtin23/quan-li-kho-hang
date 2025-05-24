@@ -1,34 +1,48 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+// src/transaction/transaction.controller.ts
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Param,
+  ParseIntPipe,
+  Query,
+} from '@nestjs/common';
+import { Transaction } from '../entities/transaction.entity';
 import { TransactionService } from './transaction.service';
-import { CreateTransactionDto } from './dto/create-transaction.dto';
-import { UpdateTransactionDto } from './dto/update-transaction.dto';
+import { CreateImportTransactionDTO } from './dto/create-transaction.dto';
 
-@Controller('transaction')
+@Controller('transactions')
 export class TransactionController {
   constructor(private readonly transactionService: TransactionService) {}
 
-  @Post()
-  create(@Body() createTransactionDto: CreateTransactionDto) {
-    return this.transactionService.create(createTransactionDto);
+  // [4.3] Lấy tất cả transactions với filter theo type
+  @Get()
+  async getAllTransactions(
+    @Query('type') type?: string,
+  ): Promise<Transaction[]> {
+    return this.transactionService.getAllTransactions(type);
   }
 
-  @Get()
-  findAll() {
-    return this.transactionService.findAll();
+  // [4.3] Lấy danh sách phiếu nhập kho
+  @Get('imports')
+  async getImportTransactions(): Promise<Transaction[]> {
+    return this.transactionService.getTransactionsByType('IMPORT');
   }
 
   @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.transactionService.findOne(+id);
+  async getTransactionById(
+    @Param('id', ParseIntPipe) id: number,
+  ): Promise<Transaction> {
+    return this.transactionService.getTransactionById(id);
   }
 
-  @Patch(':id')
-  update(@Param('id') id: string, @Body() updateTransactionDto: UpdateTransactionDto) {
-    return this.transactionService.update(+id, updateTransactionDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.transactionService.remove(+id);
+  // [4.4] API tạo phiếu nhập kho
+  @Post('import')
+  async createImportTransaction(
+    @Body() createDto: CreateImportTransactionDTO,
+  ): Promise<Transaction> {
+    // [4.2] Gọi service để tạo phiếu nhập kho
+    return this.transactionService.createImportTransaction(createDto);
   }
 }
