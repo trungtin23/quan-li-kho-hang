@@ -1,10 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
-import { InjectRepository } from '@nestjs/typeorm';
-import { Product } from 'src/entities/product.entity';
 import { ProductRepository } from './repository/product.repository';
-import { SearchProductResponse } from './response/SearchConditionResponse';
+import { SearchProductResponse } from './response/searchConditionResponse';
 
 @Injectable()
 export class ProductService {
