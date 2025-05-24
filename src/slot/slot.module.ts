@@ -9,5 +9,6 @@ import { Slot } from 'src/entities/slot.entity';
   controllers: [SlotController],
   providers: [SlotService],
   exports: [SlotService]
+
 })
 export class SlotModule {}

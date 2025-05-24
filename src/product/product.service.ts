@@ -11,6 +11,7 @@ export class ProductService {
   constructor(
     private productRepository: ProductRepository,
   ) {}
+
   create(createProductDto: CreateProductDto) {
     return 'This action adds a new product';
   }
