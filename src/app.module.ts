@@ -16,6 +16,8 @@ import { InventoryCheckModule } from './inventory-check/inventory-check.module';
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
+      envFilePath: '.env',
+
     }),
 
     TypeOrmModule.forRootAsync({
