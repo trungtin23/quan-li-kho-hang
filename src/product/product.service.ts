@@ -11,12 +11,14 @@ export class ProductService {
   constructor(
     private productRepository: ProductRepository,
   ) {}
+
   create(createProductDto: CreateProductDto) {
     return 'This action adds a new product';
   }
 
   async findAll() {
     return this.productRepository.findAll();
+
   }
 
   findOne(id: number) {
@@ -56,4 +58,5 @@ export class ProductService {
       throw new Error(error.message);
     }
   }
+
 }

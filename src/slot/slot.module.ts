@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { SlotService } from './slot.service';
 import { SlotController } from './slot.controller';
+
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { Slot } from 'src/entities/slot.entity';
 
@@ -9,5 +10,6 @@ import { Slot } from 'src/entities/slot.entity';
   controllers: [SlotController],
   providers: [SlotService],
   exports: [SlotService]
+
 })
 export class SlotModule {}
