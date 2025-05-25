@@ -9,51 +9,51 @@ import {
 import { Type } from 'class-transformer';
 import { CreateTransactionDetailDTO } from '../../transaction-detail/dto/create-transaction-detail.dto';
 
-// [4.1] DTO tạo mới phiếu nhập kho
+// DTO tạo mới phiếu nhập kho - được tạo ở bước 4.4.2
 export class CreateImportTransactionDTO {
   @IsString()
   @IsNotEmpty()
-  transactionCode: string; // [4.1] Mã phiếu nhập (VD: NK001)
+  transactionCode: string; // Mã phiếu nhập (VD: NK001) - nhập ở 4.2.1
 
   @IsNumber()
   @IsNotEmpty()
-  userId: number; // [4.1] ID nhân viên
+  userId: number; // ID nhân viên - nhập ở 4.2.1
 
   @IsString()
   @IsNotEmpty()
-  employeeName: string; // [4.1] Tên nhân viên
+  employeeName: string; // Tên nhân viên - nhập ở 4.2.1
 
   @IsNumber()
   @IsNotEmpty()
-  carrierId: number; // [4.1] ID đơn vị vận chuyển
+  carrierId: number; // ID đơn vị vận chuyển - nhập ở 4.2.1
 
   @IsString()
   @IsNotEmpty()
-  carrierName: string; // [4.1] Tên đơn vị vận chuyển
+  carrierName: string; // Tên đơn vị vận chuyển - nhập ở 4.2.1
 
   @IsNumber()
   @IsNotEmpty()
-  supplierId: number; // [4.1] ID nhà cung cấp
+  supplierId: number; // ID nhà cung cấp - nhập ở 4.2.1
 
   @IsString()
   @IsNotEmpty()
-  supplierName: string; // [4.1] Tên nhà cung cấp
+  supplierName: string; // Tên nhà cung cấp - nhập ở 4.2.1
 
   @IsDate()
   @IsNotEmpty()
   @Type(() => Date)
-  importDate: Date; // [4.1] Ngày nhập kho
+  importDate: Date; // Ngày nhập kho - nhập ở 4.2.1
 
   @IsOptional()
   @ValidateNested({ each: true })
   @Type(() => CreateTransactionDetailDTO)
-  details: CreateTransactionDetailDTO[]; // [4.2] Danh sách sản phẩm
+  details: CreateTransactionDetailDTO[]; // Danh sách sản phẩm - thêm ở 4.3.3
 
   @IsString()
   @IsOptional()
-  notes?: string; // [4.1] Ghi chú
+  notes?: string; // Ghi chú - nhập ở 4.2.1
 
   @IsNumber()
   @IsNotEmpty()
-  totalAmount: number; // [4.1] Tổng tiền
+  totalAmount: number; // Tổng tiền tự động tính toán từ danh sách sản phẩm - nhập ở 4.2.1
 }

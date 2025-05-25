@@ -1,24 +1,24 @@
 import { IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
 
-// [4.2] DTO chi tiết sản phẩm cho transaction
+// DTO chi tiết sản phẩm - được tạo ở bước 4.3.1
 export class CreateTransactionDetailDTO {
   @IsNumber()
   @IsNotEmpty()
-  productId: number; // [4.2] ID sản phẩm
+  productId: number; // ID sản phẩm - nhập ở 4.3.1
 
   @IsString()
   @IsNotEmpty()
-  productName: string; // [4.2] Tên sản phẩm
+  productName: string; // Tên sản phẩm - nhập ở 4.3.1
 
   @IsNumber()
   @IsNotEmpty()
-  price: number; // [4.2] Giá sản phẩm
+  price: number; // Giá sản phẩm - nhập ở 4.3.1
 
   @IsNumber()
   @IsNotEmpty()
-  quantity: number; // [4.2] Số lượng
+  quantity: number; // Số lượng sản phẩm - nhập ở 4.3.1
 
   @IsString()
   @IsOptional()
-  description?: string; // [4.2] Mô tả sản phẩm
+  description?: string; // Mô tả sản phẩm - nhập ở 4.3.1
 }
