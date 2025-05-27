@@ -1,6 +1,6 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { TransactionDetailService } from './transaction-detail.service';
-import { CreateTransactionDetailDto } from './dto/create-transaction-detail.dto';
+import { CreateTransactionDetailDTO } from './dto/create-transaction-detail.dto';
 import { UpdateTransactionDetailDto } from './dto/update-transaction-detail.dto';
 
 @Controller('transaction-detail')
@@ -8,7 +8,7 @@ export class TransactionDetailController {
   constructor(private readonly transactionDetailService: TransactionDetailService) {}
 
   @Post()
-  create(@Body() createTransactionDetailDto: CreateTransactionDetailDto) {
+  create(@Body() createTransactionDetailDto: CreateTransactionDetailDTO) {
     return this.transactionDetailService.create(createTransactionDetailDto);
   }
 
