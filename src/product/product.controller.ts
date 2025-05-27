@@ -1,12 +1,4 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
 import { ProductService } from './product.service';
 import { CreateProductDto } from './dto/create-product.dto';
 import { UpdateProductDto } from './dto/update-product.dto';
@@ -24,24 +16,6 @@ export class ProductController {
   findAll() {
     return this.productService.findAll();
   }
-  @Get('search-conditions')
-  async getSearchConditions() {
-    try {
-      const conditions = await this.productService.getSearchConditions();
-      return {
-        status: 200,
-        message: 'Lấy điều kiện tìm kiếm thành công.',
-        data: conditions,
-      };
-    } catch (error) {
-      return {
-        status: 500,
-        message: error.message || 'Lỗi máy chủ nội bộ.',
-        data: null,
-      };
-    }
-  }
-
 
   @Get(':id')
   findOne(@Param('id') id: string) {

@@ -10,20 +10,18 @@ import { Warehouse } from './entities/warehouse.entity';
 import { SlotModule } from './slot/slot.module';
 import { ProductModule } from './product/product.module';
 import { TransactionModule } from './transaction/transaction.module';
-import { InventoryCheckModule } from './inventory-check/inventory-check.module';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.env',
     }),
 
     TypeOrmModule.forRootAsync({
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql',
+        type: 'mysql', 
         host: configService.get('DB_HOST', 'localhost'),
         port: configService.get<number>('DB_PORT', 3306),
         username: configService.get('DB_USERNAME', 'root'),
@@ -43,7 +41,6 @@ import { InventoryCheckModule } from './inventory-check/inventory-check.module';
     SlotModule,
     ProductModule,
     TransactionModule,
-    InventoryCheckModule,
   ],
   controllers: [AppController],
   providers: [AppService],
